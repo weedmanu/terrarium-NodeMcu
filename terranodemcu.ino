@@ -22,11 +22,11 @@ DHT dhtPC(DHTPINPC, DHTTYPE);
 DHT dhtPF(DHTPINPF, DHTTYPE);
 
 // le Host 
-const char* host = "192.168.0.2";  // adresse du serveur web 
+const char* host = "192.168.0.2";  // votre adresse du serveur web , remplacer par la votre.
 
 //le wifi
-const char ssid[] = "votre SSID";  //  your network SSID (name)
-const char pass[] = "votre Mot de passe";       // your network password
+const char ssid[] = "votre SSID";  // le nom de votre reseau wifi
+const char pass[] = "votre Mot de passe";       // votre cle wifi
 
 // le serveur NTP que l'on va interroger:
 static const char ntpServerName[] = "fr.pool.ntp.org";
