@@ -22,11 +22,11 @@ DHT dhtPC(DHTPINPC, DHTTYPE);
 DHT dhtPF(DHTPINPF, DHTTYPE);
 
 // le Host 
-const char* host = "192.168.0.2";  // adresse du serveur web (NAS synology chez moi)
+const char* host = "192.168.0.2";  // adresse du serveur web 
 
 //le wifi
-const char ssid[] = "freeman";  //  your network SSID (name)
-const char pass[] = "manu2612@SOSSO1008";       // your network password
+const char ssid[] = "votre SSID";  //  your network SSID (name)
+const char pass[] = "votre Mot de passe";       // your network password
 
 // le serveur NTP que l'on va interroger:
 static const char ntpServerName[] = "fr.pool.ntp.org";
@@ -42,12 +42,12 @@ long tempscsv;
 WiFiUDP Udp;
 unsigned int localPort = 8888;  // port d'Écoute des paquets UDP
 
-time_t getNtpTime();
+time_t getNtpTime();               // heure NTP
 void digitalClockDisplay();
 void printDigits(int digits);
 void sendNTPpacket(IPAddress &address);
 
-void setup()
+void setup()   // le setup
 {
   // demarre la com serie 
   Serial.begin(9600);  
@@ -67,7 +67,7 @@ void setup()
   // on initialise les DHT 
   dhtPC.begin();
   dhtPF.begin();
-   // on declrae les pin des relais en sortie
+   // on declrae les pins des relais en sortie
   pinMode(lum, OUTPUT);
   pinMode(chauff, OUTPUT);
   // on discute encore un peu
@@ -104,7 +104,7 @@ void terrarium() {
 
   if((millis() - tempsterra) > 10000) {  // si le temps actuel par rapport au temps de demarage du timer est > 10 s
 
-    int Hnow;
+    int Hnow;             // on declare les variables
     int target;
     int Hmatin = 700;
     int Hsoir = 2100;
