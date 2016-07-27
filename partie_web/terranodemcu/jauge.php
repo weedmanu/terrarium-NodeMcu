@@ -3,7 +3,7 @@
 
     <script>
       
-        RGraph.CSV('data.csv', function (csv)        //on récupère le fichier result
+        RGraph.CSV('data.csv', function (csv)        //on récupère le fichier data.csv
         {
 
             var row = csv.getRow(1, 0);    // on enregistre les ligne du csv dans des variables
@@ -76,7 +76,7 @@
          
 <div id="canvas">
 
- <canvas class="element" id="cvs1" width="250" height="250" >       <!-- les canvas  -->
+ <canvas class="element" id="cvs1" width="250" height="250" >       <!--  les jauges -->
     [No canvas support]
 </canvas>
 
