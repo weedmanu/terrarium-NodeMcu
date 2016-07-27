@@ -5,3 +5,8 @@ Gestion d'un terrarium par un nodemcu , avec l'IDE Arduino.
 En plus de la gestion , les datas sont envoyé sur un serveur web distant afin de créer une page web affichant les datas.
 
 Le programme se nomme terranodemcu.ino , remplacez dans le programme , votre SSID , le mot de passe associé et l'adresse IP de votre serveur web.
+
+un tutoriel se trouve ici :
+
+     https://docs.google.com/presentation/d/1Z1jvrEX2-CykVUByuVt2ATh-OhA-rEuj6a-jCp1vkbQ/edit?usp=sharing
+     
