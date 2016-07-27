@@ -1,12 +1,13 @@
-Sur votre serveur, dans mysql ou autre bdd, créez une base de donnée , appelez la dht22.
+Sur votre serveur :
 
-puis l' on crée la table suivante:
+Dans mysql ou autre bdd, créez une base de donnée , appelez la dht22.
+
+Puis l' on crée la table suivante:
 
 CREATE TABLE temphumi (date DATETIME, tempC DOUBLE, tempF DOUBLE, humiC DOUBLE, humiF DOUBLE);
 
 
-Ensuite :
-
+Dans le dossier terranodemcu :
 
 Il y a trois fichiers à modifier :
 
@@ -17,7 +18,7 @@ Il faut juste remplacer LOGIN  et MOT DE PASSE par votre login et mdp de votre b
 
 Puis vous copier ce dossier (terranodemcu) à la racine de votre serveur web. (WWW)
 
-il faut également donner les droits en écriture au groupe html sur le fichier :
+Il faut également donner les droits en écriture au groupe html sur le fichier :
 
                data.csv
               
