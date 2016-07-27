@@ -19,5 +19,9 @@ Puis vous copier ce dossier (terranodemcu) à la racine de votre serveur web. (W
 
 il faut également donner les droits en écriture au groupe html sur le fichier :
 
-              data.csv
+               data.csv
               
+
+Pour voir votre page web : 
+
+               http://adresse_ip_de_votre_serveur/terranodemcu
