@@ -10,5 +10,7 @@ un tutoriel se trouve ici :
 
      https://docs.google.com/presentation/d/1Z1jvrEX2-CykVUByuVt2ATh-OhA-rEuj6a-jCp1vkbQ/edit?usp=sharing
      
-     
+ou ici :
+
+     https://freemanbox.freeboxos.fr/tuto-terranodemcu/
      
