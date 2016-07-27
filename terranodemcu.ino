@@ -102,7 +102,7 @@ void loop() {
 
 void terrarium() {
 
-  if((millis() - tempsterra) > 20000) {  // si le temps actuel par rapport au temps de demarage du timer est > 20 s
+  if((millis() - tempsterra) > 10000) {  // si le temps actuel par rapport au temps de demarage du timer est > 10 s
 
     int Hnow;             // on declare les variables
     int target;
