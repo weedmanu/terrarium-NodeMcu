@@ -8,7 +8,7 @@ if ( !$link ) {
 // Sélection de la base de données
 $db = mysql_select_db( 'dht22', $link );
 if ( !$db ) {
-  die ( 'Error selecting database temperatures : ' . mysql_error() );
+  die ( 'Error selecting database dht22 : ' . mysql_error() );
 }
 
 $sth = mysql_query("SELECT date FROM temphumi"); 
