@@ -20,7 +20,7 @@ $ef = $nb - 672;              // ne garde que 672 entrées si on purge , a modif
 
 echo "il y a $nb entrées dans la base de donnée.";
 
-if($nb > 672) //Si le nombre d'entrée est > a 1344 ici 2 semaines.
+if($nb > 1344) //Si le nombre d'entrée est > a 1344 ici 2 semaines.
      {
           echo '<br>';
           echo 'Veux tu purger la base de donnée ? ';
