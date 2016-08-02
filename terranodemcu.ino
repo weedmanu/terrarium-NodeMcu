@@ -7,7 +7,7 @@
 #include <Wire.h>                      // pour l'I2C 
 #include <LiquidCrystal_I2C.h>         // pour l'ecran lcd
 
-LiquidCrystal_I2C lcd(0x3F, 16, 2);    // adress I2C de l'ecran (pour la trouver 
+LiquidCrystal_I2C lcd(0x3F, 16, 2);    // adress I2C de l'ecran (pour la trouver utiliser scanI2C.ino (voir tuto)) et 16 colonnes, 2 lignes
 
 // pin des relais
 #define lum 5               
@@ -522,9 +522,9 @@ void outro () {
       
     delay(1000);  
     lcd.setCursor(2,0);
-    lcd.print("Bye bye");
-    lcd.setCursor(7,1);
-    lcd.print("Manu");
+    lcd.print("Bye bye !!!");
+    lcd.setCursor(1,1);
+    lcd.print("Terra-NodeMcu");
     delay(3000); 
     lcd.clear(); 
     lcd.noBacklight();
@@ -603,7 +603,5 @@ void sendNTPpacket(IPAddress &address)
   Udp.write(packetBuffer, NTP_PACKET_SIZE);
   Udp.endPacket();
 }
-
-
 
 
