@@ -10,6 +10,8 @@ En plus de la gestion :
 
 Le programme se nomme terranodemcu.ino , remplacez dans le programme , votre SSID , le mot de passe associé et l'adresse IP de votre serveur web.
 
+Dans le programme terranodemcu.ino l'adresse I2C par defaut est 03xF (ligne 10) , le programme scanI2C sert a trouver votre adresse s'il elle diffère du programme.
+
 un tutoriel se trouve ici :
 
     
