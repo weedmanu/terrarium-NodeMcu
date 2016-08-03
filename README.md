@@ -15,7 +15,7 @@ Dans le programme terranodemcu.ino l'adresse I2C par defaut est 03xF (ligne 10) 
 un tutoriel se trouve ici :
 
     
-     https://freemanbox.freeboxos.fr/tuto-terranodemcu/
+     [https://freemanbox.freeboxos.fr/tuto-terranodemcu/](https://freemanbox.freeboxos.fr/tuto-terranodemcu/)
      
      ou ici:
      
