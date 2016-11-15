@@ -12,12 +12,8 @@ Le programme se nomme terranodemcu.ino , remplacez dans le programme , votre SSI
 
 Dans le programme terranodemcu.ino l'adresse I2C par defaut est 03xF (ligne 10) , le programme scanI2C sert a trouver votre adresse s'il elle diffère du programme.
 
-un tutoriel se trouve ici :
+un tutoriel se trouve [ici](http://nasfamilyone.synology.me/tuto-terranodemcu/index.php) ou [là]( https://docs.google.com/presentation/d/1g7XbasA5Uc-QHqzkxNnwfHUlCG-mjSonYLsY-LYzw_s/edit?usp=sharing)
 
     
-     http://freemanbox.freeboxos.fr/tuto-terranodemcu/
-     
-     ou ici:
-     
-     https://docs.google.com/presentation/d/1g7XbasA5Uc-QHqzkxNnwfHUlCG-mjSonYLsY-LYzw_s/edit?usp=sharing
+ 
      
