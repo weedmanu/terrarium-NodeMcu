@@ -1,7 +1,7 @@
 <?php
-
-$loginadmin = 'manu';
-$mdpadmin = 'manu@.13';
+// on défini ses identifiant
+$loginadmin = 'xxxxxx';
+$mdpadmin = 'yyyyyy';
 
   // Definition des constantes et variables
   define('LOGIN',$loginadmin);   
