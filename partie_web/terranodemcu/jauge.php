@@ -2,15 +2,15 @@
 
 
     <script>
-      
-        RGraph.CSV('data.csv', function (csv)        //on récupère le fichier data.csv
+		
+        RGraph.CSV('data.csv', function (csv)        //on récupère le fichier result
         {
 
             var row = csv.getRow(1, 0);    // on enregistre les ligne du csv dans des variables
             var row1 = csv.getRow(1, 1);
             var row2 = csv.getRow(2, 0);
             var row3 = csv.getRow(2, 1);
-
+			
             var gauge = new RGraph.Gauge({
                 id: 'cvs',           // l id du canvas
                 min: 0,
@@ -70,13 +70,13 @@
 
 <div id="titre">
     <div class="element">Température</div> 
-    <div class="element">Humiditée</div>    
+    <div class="element">Humidité</div>    
 </div>  
 
          
 <div id="canvas">
 
- <canvas class="element" id="cvs1" width="250" height="250" >       <!--  les jauges -->
+ <canvas class="element" id="cvs1" width="250" height="250" >       <!-- les canvas  -->
     [No canvas support]
 </canvas>
 

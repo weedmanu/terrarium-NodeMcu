@@ -25,13 +25,13 @@ $(function () {
 					format: '{value}°C',
 				},
 				title: {
-					text: 'Temperature',
+					text: 'Température',
 				}				
 
 			}, { // 2EME yAxis
 				gridLineWidth: 0,
 				title: {
-					text: 'humiditée',
+					text: 'humidité',
 				},
 				labels: {
 					format: '{value} %',
@@ -52,7 +52,7 @@ $(function () {
                 },
 				
 			series: [{
-				name: 'Temperature pointchaud',
+				name: 'Température pointchaud',
 				type: 'spline',
 				yAxis: 0,
 				marker: {
@@ -68,7 +68,7 @@ $(function () {
 					valueSuffix: ' °C'
 				}
 			} , {
-				name: 'Temperature pointfroid',
+				name: 'Température pointfroid',
 				type: 'spline',
 				yAxis: 0,
 				marker: {
@@ -84,7 +84,7 @@ $(function () {
 					valueSuffix: ' °C'
 				}
 			},  {
-				name: 'humiditée pointfroid',
+				name: 'humidité pointfroid',
 				type: 'spline',
 				yAxis: 1,
 				marker: {
@@ -101,7 +101,7 @@ $(function () {
 				}
 
 			}, {
-				name: 'humiditée pointchaud',
+				name: 'humidité pointchaud',
 				type: 'spline',
 				yAxis: 1,
 				marker: {

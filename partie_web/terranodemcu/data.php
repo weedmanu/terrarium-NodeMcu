@@ -1,6 +1,6 @@
 <?php
 // 1 - Connexion à MySQL
-$link = mysql_connect( 'localhost', 'LOGIN', 'MOT DE PASSE' ); //changer password par votre mot de passe si vous l'avez changé.
+$link = mysql_connect( 'localhost', 'root', 'manu@.13' ); //changer password par votre mot de passe si vous l'avez changé.
 if ( !$link ) {
   die( 'Could not connect: ' . mysql_error() );
 }
@@ -8,7 +8,7 @@ if ( !$link ) {
 // Sélection de la base de données
 $db = mysql_select_db( 'dht22', $link );
 if ( !$db ) {
-  die ( 'Error selecting database dht22 : ' . mysql_error() );
+  die ( 'Error selecting database temperatures : ' . mysql_error() );
 }
 
 $sth = mysql_query("SELECT date FROM temphumi"); 
