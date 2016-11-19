@@ -10,7 +10,7 @@ En plus de la gestion :
 
 - les datas sont affiche sur l'ecran lcd si l'on appuie sur le bouton
 
-- les datas sont envoyé sur un serveur web distant un petit site web affichant les datas.
+- les datas sont envoyé sur un serveur web distant (un NAS où autre) afin de créer une interface web pour le terrarium.
 
 Il y a également un [Tutoriel](http://nasfamilyone.synology.me/tuto-terranodemcu/) et les codes sont commentés.
 
