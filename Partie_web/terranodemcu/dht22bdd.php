@@ -12,6 +12,7 @@
 $sqlt = "insert into dht22.temphumi (tempC,humiC,tempF,humiF) values ($tempC,$humiC,$tempF,$humiF)";
 mysql_query($sqlt);
 
+<<<<<<< HEAD
 //on ferme la connexion à MySQL
 mysql_close($result);
 
@@ -19,5 +20,7 @@ mysql_close($result);
 if ($tempC < 20) {	
 	fopen("https://smsapi.free-mobile.fr/sendmsg?user=XXXXXXXX&pass=YYYYYYYYY&msg=Alerte%20!%20Limit%20atteinte%20:%20tempC%20=%20$tempC%20°C%20,%20tempF%20=%20$tempF%20°C%20,%20humiC%20=%20$humiC%20%%20,%20humiF%20=%20$humiF%%20", "r");
 }
+=======
+>>>>>>> 5be25c3c4a493151bd5fef4af9fff28bdcbe1873
 		
 ?>
