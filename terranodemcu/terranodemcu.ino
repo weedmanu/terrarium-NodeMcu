@@ -40,8 +40,8 @@ const char* update_username = "XXXX";  // votre identifiant pour accéder à la 
 const char* update_password = "YYYY";  // votre mote de passe 
 
 //le wifi
-const char ssid[] = "XXXX";  //  votre SSID
-const char pass[] = "YYYY";       // votre clé wi-fi
+const char ssid[] = "XXXXX";  //  votre SSID
+const char pass[] = "YYYYY";       // votre clé wi-fi
 
              //////////////////////////////////////////////////////
 
