@@ -1,6 +1,6 @@
 <?php
 // 1 - Connexion à MySQL
-$link = mysql_connect( 'localhost', 'root', 'manu@.13' ); // changer par votre password 
+$link = mysql_connect( 'localhost', 'XXXX', 'YYYY' ); // changer par votre login et password 
 if ( !$link ) {
   die( 'Could not connect: ' . mysql_error() );
 }

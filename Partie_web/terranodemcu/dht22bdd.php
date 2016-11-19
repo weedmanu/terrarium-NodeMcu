@@ -1,6 +1,6 @@
  <?php
  
-   $result = mysql_connect("localhost", "manu", "manu@.13"); 
+   $result = mysql_connect("localhost", "XXXX", "YYYY"); 
    
     $tempC = $_GET["tempC"];
     $humiC = $_GET["humiC"];

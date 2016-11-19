@@ -29,22 +29,25 @@ LiquidCrystal_I2C lcd(0x3F, 16, 2);    // paramétrage de l'écran : adresse I2C
 DHT dhtPC(DHTPINPC, DHTTYPE);
 DHT dhtPF(DHTPINPF, DHTTYPE);
 
+              ///////partie à modifier avec vos paramètres \\\\\\\
 // le Host 
-const char* host = "192.168.XXX.XXX";  // adresse du serveur web (NAS synology chez moi)
+const char* host = "192.168.0.2";  // adresse du serveur web (NAS synology chez moi)
 
 //pour la page web 
 const char* hostU = "webupdate"; 
 const char* update_path = "/firmware";
-const char* update_username = "XXXX";  // votre identifiant pour accéder à la page 
-const char* update_password = "YYYY";  // votre mote de passe 
-
-
-ESP8266WebServer httpServer(80);
-ESP8266HTTPUpdateServer httpUpdater;
+const char* update_username = "manu";  // votre identifiant pour accéder à la page 
+const char* update_password = "manu@.13";  // votre mote de passe 
 
 //le wifi
-const char ssid[] = "XXXXX";  //  votre SSID
-const char pass[] = "YYYYYYYYY";       // votre password
+const char ssid[] = "freeman";  //  votre SSID
+const char pass[] = "manu2612@SOSSO1008";       // votre clé wi-fi
+
+             //////////////////////////////////////////////////////
+
+// on initialise le seveur web
+ESP8266WebServer httpServer(80);
+ESP8266HTTPUpdateServer httpUpdater;
 
 // le serveur NTP que l'on va interroger:
 static const char ntpServerName[] = "fr.pool.ntp.org";
@@ -142,12 +145,13 @@ void terrarium() {
 
   if((millis() - tempsterra) > 10000) {  // si le temps actuel par rapport au temps de démarrage du timer est > 10 s ( toutes les 10 s )
 
+     // On déclare les variables
     int Hnow;
     int target;
-    int Hmatin = 730;
-    int Hsoir = 1730;
+    int Hmatin = 730;           // à modifier selon vos souhaits.
+    int Hsoir = 1730;           // à modifier selon vos souhaits.
     
-    Hnow = hour() * 100 + minute(); // pour faciliter les calcul (21h03 devient 2103) (heure UTC)   
+    Hnow = hour() * 100 + minute(); // pour faciliter les calcul (21h03 devient 2103) 
       
     if ( Hnow > Hmatin && Hnow < Hsoir ) {  // si c'est le jour
     target = 28;                            // la consigne du chauffage est de 28 °C   
@@ -157,7 +161,7 @@ void terrarium() {
       digitalWrite(lum, HIGH);              // on active le relais, il coupe le courant, la lumière est éteinte
        }                 
      
-          // lire les sondes (température uniquement)
+          // lis les sondes (température uniquement)
     float tC = dhtPC.readTemperature(); // (point chaud)
       
     float tF = dhtPF.readTemperature(); // (point froid) 
@@ -198,7 +202,7 @@ void envoibdd() {
     float hF = dhtPF.readHumidity();  
     float tF = dhtPF.readTemperature();
     
-    // envoi les datas par l'URL par GET au fichier dht22bdd.php sur le serveur
+    // envoi les datas par l'URL par GET au fichier dht22bdd.php sur le serveur (dans le dossier terranodemcu)
     client.print(String("GET /terranodemcu/dht22bdd.php?tempC=") + String(float (tC)) + "&humiC=" + String(float(hC)) + "&tempF=" + String(float(tF)) + "&humiF=" + String(float(hF)) + " HTTP/1.1\r\n" +
                  "Host: " + host + "\r\n" + 
                  "Connection: close\r\n\r\n");
@@ -243,7 +247,7 @@ void datacsv() {
     float hF = dhtPF.readHumidity();  
     float tF = dhtPF.readTemperature();
     
-    // envoi les data par l'URL au fichier dht22csv.php sur le serveur
+    // envoi les data par l'URL au fichier dht22csv.php sur le serveur (dans le dossier terranodemcu)
     client.print(String("GET /terranodemcu/dht22csv.php?tempC=") + String(float (tC)) + "&humiC=" + String(float(hC)) + "&tempF=" + String(float(tF)) + "&humiF=" + String(float(hF)) + " HTTP/1.1\r\n" +
                  "Host: " + host + "\r\n" + 
                  "Connection: close\r\n\r\n");
@@ -292,7 +296,7 @@ void bouton() {
 
 void intro() {
 
-// on définie les variables des caractères perso TAIL HEAD CLEAR 
+// on définie les variables où seront stockés les caractères perso TAIL HEAD CLEAR 
 
   const int TAIL = 4;            
   const int HEAD = 1;              
