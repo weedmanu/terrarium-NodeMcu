@@ -1,7 +1,7 @@
 <?php
-// on défini ses identifiant
-$loginadmin = 'xxxxxx';
-$mdpadmin = 'yyyyyy';
+
+$loginadmin = 'XXXX'; // votre login
+$mdpadmin = 'YYYYY'; // mot de passe
 
   // Definition des constantes et variables
   define('LOGIN',$loginadmin);   
@@ -29,8 +29,8 @@ $mdpadmin = 'yyyyyy';
         session_start();
         // On enregistre le login en session
         $_SESSION['login'] = LOGIN;
-        // On redirige vers le fichier admin.php
-        header('Location: admin.php');
+        // On redirige vers le fichier index.php
+        header('Location: index.php');
         exit();
       }
     }
@@ -71,7 +71,7 @@ $mdpadmin = 'yyyyyy';
       
     </form>
 
-<a href="index.php" style="text-decoration:none" id="accueil" >Accueil</a>
+<a href="../index.php" style="text-decoration:none" id="accueil" >Accueil</a>
 
   </body>
 </html>

@@ -1,17 +1,17 @@
 // les librairies utilisées 
 
-#include <TimeLib.h>                   // pour serveur NTP
-#include <ESP8266WiFi.h>               // pour le reseau
+#include <TimeLib.h>                   // pour le serveur NTP
+#include <ESP8266WiFi.h>               // pour le réseau
 #include <WiFiUdp.h>                   // pour interroger le serveur NTP
 #include "DHT.h"                       // pour lire les sondes  
 #include <Wire.h>                      // pour l'I2C 
-#include <LiquidCrystal_I2C.h>         // pour l'ecran lcd
-#include <WiFiClient.h>
-#include <ESP8266WebServer.h>
-#include <ESP8266mDNS.h>
-#include <ESP8266HTTPUpdateServer.h>
+#include <LiquidCrystal_I2C.h>         // pour l'écran lcd
+#include <WiFiClient.h>                // pour se connecter à un serveur
+#include <ESP8266WebServer.h>          // crée un serveur
+#include <ESP8266mDNS.h>               // pour les DNS
+#include <ESP8266HTTPUpdateServer.h>   // pour flasher le nodemcu par le web 
 
-LiquidCrystal_I2C lcd(0x3F, 16, 2);    // adress I2C de l'ecran (pour la trouver utiliser scanI2C.ino (voir tuto)) et 16 colonnes, 2 lignes
+LiquidCrystal_I2C lcd(0x3F, 16, 2);    // paramétrage de l'écran : adresse I2C de lécran (pour la trouver utiliser scanI2C.ino (voir tuto)) et 16 colonnes, 2 lignes
 
 // pin des relais
 #define lum 5               
@@ -22,7 +22,7 @@ LiquidCrystal_I2C lcd(0x3F, 16, 2);    // adress I2C de l'ecran (pour la trouver
 #define DHTPINPC 14
 #define DHTPINPF 0
 
-// defini le capteur DHT22 
+// défini le capteur DHT22 
 #define DHTTYPE DHT22
 
 // Initialise les capteurs
@@ -30,46 +30,46 @@ DHT dhtPC(DHTPINPC, DHTTYPE);
 DHT dhtPF(DHTPINPF, DHTTYPE);
 
 // le Host 
-const char* host = "192.168.0.2";  // adresse du serveur web (NAS synology chez moi)
+const char* host = "192.168.XXX.XXX";  // adresse du serveur web (NAS synology chez moi)
 
 //pour la page web 
-const char* hostU = "NodeMCU-webupdate"; 
+const char* hostU = "webupdate"; 
+const char* update_path = "/firmware";
+const char* update_username = "XXXX";  // votre identifiant pour accéder à la page 
+const char* update_password = "YYYY";  // votre mote de passe 
+
+
 ESP8266WebServer httpServer(80);
 ESP8266HTTPUpdateServer httpUpdater;
 
 //le wifi
-const char ssid[] = "freeman";  //  votre SSID
-const char pass[] = "manu2612@SOSSO1008";       // votre password
+const char ssid[] = "XXXXX";  //  votre SSID
+const char pass[] = "YYYYYYYYY";       // votre password
 
 // le serveur NTP que l'on va interroger:
 static const char ntpServerName[] = "fr.pool.ntp.org";
 
-const int timeZone = 2;     // paris - bruxelle
+const int timeZone = 1;     // paris - bruxelle
 
 //On défini le bouton
 const int  buttonPin = 12;    
 
-int buttonState = 0;         // etat du bouton est a 0
-int lastButtonState = 0;     // l'ancien etat est a 0
+int buttonState = 0;         // état du bouton est a 0
+int lastButtonState = 0;     // l'ancien état est a 0
 
-// variable pour gérer la boucle de chaque fonction du loop avec millis()
+//On déclare les variables pour gérer la boucle de chaque fonction du loop avec millis()
 long tempsterra;
 long tempsenvoi;
 long tempscsv;
 
 WiFiUDP Udp;
-unsigned int localPort = 8888;  // port d'Écoute des paquets UDP
+unsigned int localPort = 8888;  // Le port d'Écoute des paquets UDP
 
-// l'heure
-time_t getNtpTime();
-void digitalClockDisplay();
-void printDigits(int digits);
-void sendNTPpacket(IPAddress &address);
 
 void setup()
 {
-  // demarre la com serie 
-  Serial.begin(57600);  
+  // On démarre la com série 
+  Serial.begin(115200);  
   delay(100);
   // initialise le GPIO du bouton en input PULLUP: 
   pinMode(buttonPin, INPUT_PULLUP);
@@ -77,46 +77,48 @@ void setup()
    Wire.begin(2,4);
   // initialise le LCD
   lcd.begin();  
-  // eteint le retro-eclairage et efface
+  // éteint le retro-éclairage et efface l'écran
   lcd.noBacklight();
   lcd.clear();
-  // on discute un peu sur le port serie
+  // on discute un peu sur le port série
   Serial.println("Terrarium");  
   Serial.print("Connexion à ");
   Serial.println(ssid);
-  // on se conecte au reseau
+  // on se connecte au réseau
   WiFi.begin(ssid, pass);  
-  // lorsque l'on est connecte:
+  // on attend la connexion :
   while (WiFi.status() != WL_CONNECTED) { 
     delay(500);
     Serial.print(".");
   }
-  // on defini la page web
+  // on affiche l'IP attribué
+  Serial.print("L'adresse IP assignée par DHCP est : ");
+  Serial.println(WiFi.localIP());
+  // on défini la page web
   MDNS.begin(hostU);
-  httpUpdater.setup(&httpServer);
+  httpUpdater.setup(&httpServer, update_path, update_username, update_password);
   httpServer.begin();
   MDNS.addService("http", "tcp", 80);
-  Serial.printf("HTTPUpdateServer prêt !!! Ouvre http://ton_ip/update dans ton navigateur\n", hostU);
-  
-  // on initialise les DHT 
+  Serial.printf("HTTPUpdateServer prêt !!! Ouvre http://");
+  Serial.print(WiFi.localIP());
+  Serial.printf("/update dans ton navigateur\n", hostU);
+    // on initialise les DHT 
   dhtPC.begin();
   dhtPF.begin();
-   // on declare les pins des relais en sortie
+   // on déclare les pins des relais en sortie
   pinMode(lum, OUTPUT);
   pinMode(chauff, OUTPUT);
-  // on discute encore un peu
-  Serial.print("IP number assigned by DHCP is ");
-  Serial.println(WiFi.localIP());
-  Serial.println("Starting UDP");
-  // on demarre l'ecoute udp
+  // on discute encore un peu 
+  Serial.println("Lancement de l'UDP");
+  // on démarre l'écoute UDP
   Udp.begin(localPort);
-  Serial.print("Local port: ");
+  Serial.print("Port local: ");
   Serial.println(Udp.localPort());
-  Serial.println("waiting for sync");
-  // on recup l'heure
+  Serial.println("attente de synchronisation");
+  // on récupère l'heure
   setSyncProvider(getNtpTime);
   setSyncInterval(300);
-  // on  donne le temps actuel aux variable pour le demmarage du timer
+  // on  donne le temps actuel aux variable pour le démarrage du timer des fonctions
   tempsterra = millis();
   tempsenvoi =  millis();
   tempscsv = millis();
@@ -124,32 +126,43 @@ void setup()
 }
 
 
-//******  la fonction qui s'occupe du chauffage et de la lumiere ******
+ //******   on lance les fonctions en boucle ******
+
+ void loop() {
+  httpServer.handleClient();
+  terrarium();       
+  envoibdd();
+  datacsv();
+  bouton();
+}
+
+
+//******  la fonction qui s'occupe du chauffage et de la lumière ******
 void terrarium() {
 
-  if((millis() - tempsterra) > 10000) {  // si le temps actuel par rapport au temps de demarage du timer est > 10 s
+  if((millis() - tempsterra) > 10000) {  // si le temps actuel par rapport au temps de démarrage du timer est > 10 s ( toutes les 10 s )
 
     int Hnow;
     int target;
-    int Hmatin = 800;
-    int Hsoir = 1800;
+    int Hmatin = 730;
+    int Hsoir = 1730;
     
     Hnow = hour() * 100 + minute(); // pour faciliter les calcul (21h03 devient 2103) (heure UTC)   
       
     if ( Hnow > Hmatin && Hnow < Hsoir ) {  // si c'est le jour
     target = 28;                            // la consigne du chauffage est de 28 °C   
-    digitalWrite(lum, LOW);                 // on active pas le relais et le courant passe donc la lumiere est allumée
+    digitalWrite(lum, LOW);                 // on active pas le relais et le courant passe donc la lumière est allumée
     } else {                                // sinon , donc c'est la nuit
       target = 23;                          // la consigne du chauffage est de 23 °C
-      digitalWrite(lum, HIGH);              // on active le relais, il coupe le courant, la lumiere est eteinte
+      digitalWrite(lum, HIGH);              // on active le relais, il coupe le courant, la lumière est éteinte
        }                 
      
-          // lire les sondes (temperature uniquement)
-    float tC = dhtPC.readTemperature(); // (pointchaud)
-      // lire la sonde point froid 
-    float tF = dhtPF.readTemperature(); // (pointfroid) 
+          // lire les sondes (température uniquement)
+    float tC = dhtPC.readTemperature(); // (point chaud)
+      
+    float tF = dhtPF.readTemperature(); // (point froid) 
     
-    if (target < tC or tF > 23 ) {        // si la temperature au point chaud dépasse la target (28 le jour ou 23 la nuit) et qu'au point froid il fait plus de 23 °C (pour l'été).
+    if (target < tC or tF > 23 ) {        // si la température au point chaud dépasse la target (28 le jour ou 23 la nuit) et qu'au point froid il fait plus de 23 °C (pour l'été).
       digitalWrite(chauff, HIGH);         // on active le relais qui éteint le chauffage.
       } else {                            // sinon
         digitalWrite(chauff, LOW);        // on allume le chauffage.
@@ -160,17 +173,17 @@ void terrarium() {
    
 }
 
-//******  envoi les datas a la bdd ******
+//******  envoi des datas à la base de donnée ******
 
 void envoibdd() {
 
-  if((millis() - tempsenvoi) > 60000*15) {   // si le temps actuel par rapport au temps de demarage du timer est > 15 min
+  if((millis() - tempsenvoi) > 60000*15) {   // si le temps actuel par rapport au temps de démarrage du timer est > 15 min ( toutes les 15 min )
 
-    Serial.print("Connecting to ");         // on discute un peu sur le port serie
+    Serial.print("Connecting to ");         // on discute un peu sur le port série
     Serial.println(host);
     Serial.println("pour envoibdd");
     
-    // creation de la connexion tcp
+    // création de la connexion TCP
     WiFiClient client;
     const int httpPort = 80;
     if (!client.connect(host, httpPort)) {
@@ -185,13 +198,13 @@ void envoibdd() {
     float hF = dhtPF.readHumidity();  
     float tF = dhtPF.readTemperature();
     
-    // envoi les data par l'url au fichier dht22bdd.php sur le serveur
+    // envoi les datas par l'URL par GET au fichier dht22bdd.php sur le serveur
     client.print(String("GET /terranodemcu/dht22bdd.php?tempC=") + String(float (tC)) + "&humiC=" + String(float(hC)) + "&tempF=" + String(float(tF)) + "&humiF=" + String(float(hF)) + " HTTP/1.1\r\n" +
                  "Host: " + host + "\r\n" + 
                  "Connection: close\r\n\r\n");
     delay(10);
     
-    // Lire toutes les lignes de la réponse du serveur et fermer la connexion
+    // Lire toutes les lignes de la réponse du serveur, les écrire et fermer la connexion.
     while(client.available()){
       String line = client.readStringUntil('\r');
       Serial.print(line);
@@ -205,17 +218,17 @@ void envoibdd() {
     
 }
 
-//******  écriture des datas dans un csv sur le serveur pour les jauges (on increment pas le fichier on ecrase les valeurs) ******
+//******  écriture des datas dans un csv sur le serveur pour les jauges (on incrément pas le fichier on écrase les valeurs) ******
 
 void datacsv() {
 
-  if((millis() - tempscsv) > 30000) {         // si le temps actuel par rapport au temps de demarage du timer est > 30 secondes
+  if((millis() - tempscsv) > 30000) {         // si le temps actuel par rapport au temps de démarrage du timer est > 30 secondes
 
-    Serial.print("Connecting to ");          // on discute un peu sur le port serie
+    Serial.print("Connecting to ");          // on discute un peu sur le port série
     Serial.println(host);
     Serial.println("pour envoicsv");
     
-    // creation de la connexion tcp    
+    // création de la connexion TCP   
     WiFiClient client;
     const int httpPort = 80;
     if (!client.connect(host, httpPort)) {
@@ -230,13 +243,13 @@ void datacsv() {
     float hF = dhtPF.readHumidity();  
     float tF = dhtPF.readTemperature();
     
-    // envoi les data par l'url au fichier dht22csv.php sur le serveur
+    // envoi les data par l'URL au fichier dht22csv.php sur le serveur
     client.print(String("GET /terranodemcu/dht22csv.php?tempC=") + String(float (tC)) + "&humiC=" + String(float(hC)) + "&tempF=" + String(float(tF)) + "&humiF=" + String(float(hF)) + " HTTP/1.1\r\n" +
                  "Host: " + host + "\r\n" + 
                  "Connection: close\r\n\r\n");
     delay(10);
     
-    // Lire et ecrire sur le port serie toutes les lignes de la réponse du serveur et fermer la connexion
+    // Lire et écrire sur le port série toutes les lignes de la réponse du serveur et fermer la connexion
     while(client.available()){
       String line = client.readStringUntil('\r');
       Serial.print(line);
@@ -253,40 +266,40 @@ void datacsv() {
 //****** le bouton ******
 
 void bouton() {
-  // lit l'etat du bouton 
+  // lit l'état du bouton 
   buttonState = digitalRead(buttonPin);
 
-  // compare avec l'etat precedant
+  // compare avec l'état précédant
   if (buttonState != lastButtonState) {
-    // si l'etat du bouton est a 1 (bouton relache) on ecrit off dans la com serie et rien d 'autre
+    // si l'etat du bouton est a 1 (bouton relâché) on ecrit off dans la com serie et rien d 'autre
     if (buttonState == HIGH) {
       Serial.println("off");
     } else {
-      // si l'etat du bouton est a 0 (bouton enclenche) on ecrit on dans la com serie et lance la fonction d'affichage      
+      // si l'état du bouton est a 0 (bouton enclenché) on écrit on dans la com série et lance la fonction d'affichage      
       Serial.println("on");
       affichage();
       delay(1000);
     }
-    // Delay pour la sensibilite du bouton 
+    // Delay pour la sensibilité du bouton 
     delay(50);
   }
-  // sauve l'etat du bouton pour la reinitialiser la boucle  
+  // sauve l'état du bouton pour la réinitialiser la boucle  
   lastButtonState = buttonState;
 
 }
 
-//****** animation lcd avant l'affichage des datas ******
+//****** animation LCD avant l'affichage des datas ******
 
 void intro() {
 
-// definie les caracteres perso TAIL HEAD CLEAR 
+// on définie les variables des caractères perso TAIL HEAD CLEAR 
 
   const int TAIL = 4;            
   const int HEAD = 1;              
   const int CLEAR = 2;              
  
 
-//le dessin des caractere HEAD TAIL CLEAR
+//le dessin des caractères HEAD TAIL CLEAR
 
   byte snakeHead[8] = {     // head
      B10001,
@@ -321,13 +334,13 @@ byte noSnake[8] = {        // Clear
      B00000
   };
 
-// creer les caracteres
+// création des caractères
 
   lcd.createChar(HEAD, snakeHead);
   lcd.createChar(TAIL, snakeTail);
   lcd.createChar(CLEAR, noSnake);
 
-// l'animation en elle meme.
+// l'animation en elle même.
 
        
    lcd.setCursor(0,1);
@@ -482,7 +495,7 @@ byte noSnake[8] = {        // Clear
    delay(1000);
 
 }
-//****** affichage sondes temps reel lcd ********
+//****** affichage des datas des sondes en temps réel sur l'écran LCD ********
 
 void affichage() {
       // lire la sondes point chaud
@@ -492,10 +505,10 @@ void affichage() {
     float hF = dhtPF.readHumidity();  
     float tF = dhtPF.readTemperature();
 
-    // on allume le retro-eclairage
+    // on allume le retro-éclairage
     lcd.backlight();
     delay(500);
-    // on l'ance l'animation d'intro
+    // on lance l'animation d'introduction
     intro();
     // puis on affiche les datas
     lcd.setCursor(3,0);
@@ -531,7 +544,7 @@ void affichage() {
         
 }
 
-//****** sortie affichage  ******
+//****** sortie de l'affichage  ******
 
 void outro () {
       
@@ -547,17 +560,8 @@ void outro () {
  }
 
 
- //******   on lance les fonctions en boucle ******
 
- void loop() {
-  httpServer.handleClient();
-  terrarium();       
-  envoibdd();
-  datacsv();
-  bouton();
-}
-
-//****** la partie suivante n'est pas de moi , c'est l'exemple TimeNTP_ESP8266WIFI de la librairie Time. ( pour avoir l'heure par le reseau) ******
+//****** la partie suivante n'est pas de moi , c'est l'exemple TimeNTP_ESP8266WIFI de la librairie Time. ( pour avoir l'heure par le réseau) ******
 
 /*-------- NTP code ----------*/
 

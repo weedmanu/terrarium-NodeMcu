@@ -7,8 +7,7 @@
         <script src="lib/highcharts.js"></script> <!-- appel de la librairie highcharts --> 
         <script src="lib/graphhisto.js"></script> <!-- appel du graphique highcharts -->
         <script src="lib/gray.js"></script> <!-- appel du thème highcharts --> 
-        <link rel="stylesheet" href="index.css" /> <!-- appel du thème de la page -->  
-    
+        <link rel="stylesheet" href="histo.css" /> <!-- appel du thème de la page --> 
 </head>
 
 <body>
@@ -24,34 +23,35 @@
         </header>
         
         
-		<section>	<!-- corps de page -->	
-						
-			
-				<div id="container" class="conteneur"></div> <!-- contiendra le graphique -->
+        
+				<section>	<!-- corps de page -->	
 				
-		</section>
+					<div id="container"></div> <!-- contiendra le graphique -->
+				
+				</section>
         
         
         
-        <footer>	<!-- pied de page -->
+                <footer>	<!-- pied de page -->
 			        
          <div class="conteneur">       
 			 
-			<div class="element2" id="serpent">
+			<div class="element" id="serpent">
                 <a href="index.php" style="text-decoration:none"><span id="accueil">Accueil</span></a> <!--lien vers la page historique-->
             </div> 
     
 			
-			<div class="element2" id="bdd"><?php require'bdd.php';?></div> <!-- contiendra la gestion de la bdd -->		
+			<div class="element" id="bdd"><?php require'bdd.php';?></div> <!-- contiendra la gestion de la bdd -->		
 			
 
-			<div class="element2" id="pc">
-                <a href="auth.php" style="text-decoration:none"><span id="admin">Admin</span></a><!--lien vers la page admin-->
+			<div class="element" id="pc">
+                <a href="admin/index.php" style="text-decoration:none"><span id="admin">Admin</span></a><!--lien vers la page admin-->
             </div>            
             			
         </div>									
 
 		</footer>
+        
         
        
  

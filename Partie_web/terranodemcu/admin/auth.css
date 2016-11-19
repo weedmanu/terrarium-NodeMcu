@@ -1,7 +1,7 @@
   body {
    font: 24px Helvetica;
    margin: auto;
-   background-image:url(img/fondserpent.jpeg);   
+   background-image:url(../img/fondserpent.jpeg);   
    }
    
    h1{
@@ -25,7 +25,7 @@
 
 #accueil {
     
-    padding: 5px 10px; 
+    padding: 3px 20px; 
     background: red;
     color: black;   
     font-size: 14px;

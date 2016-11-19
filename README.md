@@ -1,4 +1,4 @@
-#terrarium-NodeMCU (tutoriel en cours de réalisation)
+#terrarium-NodeMCU (tutoriel en cours de modification)
 
 Gestion d'un terrarium par un nodemcu , avec l'IDE Arduino.
 
@@ -14,8 +14,8 @@ Le programme se nomme terranodemcu.ino , remplacez dans le programme , votre SSI
 
 Dans le programme terranodemcu.ino l'adresse I2C par defaut est 03xF (ligne 10) , le programme scanI2C sert a trouver votre adresse s'il elle diffère du programme.
 
+## ajout de la fonction webupdate
 
 
-    
  
      

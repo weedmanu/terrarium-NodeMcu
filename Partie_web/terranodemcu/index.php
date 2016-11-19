@@ -41,13 +41,13 @@ var auto_refresh = setInterval(
 			
 					<div class="element" id="gauge"><?php require'jauge.php';?></div> <!-- contiendra les jauges -->
 				
-				</div>      				
+				</div>      
 				
 				</section>
         
         
         
-        <footer>	<!-- pied de page -->
+         <footer>	<!-- pied de page -->
 			
 		 <div class="conteneur">       
 			 
@@ -60,13 +60,12 @@ var auto_refresh = setInterval(
 			
 
 			<div class="element" id="pc">
-                <a href="auth.php" style="text-decoration:none"><span id="admin">Admin</span></a><!--lien vers la page admin-->
+                <a href="admin/index.php" style="text-decoration:none"><span id="admin">Admin</span></a><!--lien vers la page admin-->
             </div>            
             			
         </div>												
 
 		</footer>
-        
        
  
 
