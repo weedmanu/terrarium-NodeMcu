@@ -31,17 +31,17 @@ DHT dhtPF(DHTPINPF, DHTTYPE);
 
               ///////partie à modifier avec vos paramètres \\\\\\\
 // le Host 
-const char* host = "192.168.0.2";  // adresse du serveur web (NAS synology chez moi)
+const char* host = "192.168.XXX.XXX";  // adresse du serveur web (NAS synology chez moi)
 
 //pour la page web 
 const char* hostU = "webupdate"; 
 const char* update_path = "/firmware";
-const char* update_username = "manu";  // votre identifiant pour accéder à la page 
-const char* update_password = "manu@.13";  // votre mote de passe 
+const char* update_username = "XXXX";  // votre identifiant pour accéder à la page 
+const char* update_password = "YYYY";  // votre mote de passe 
 
 //le wifi
-const char ssid[] = "freeman";  //  votre SSID
-const char pass[] = "manu2612@SOSSO1008";       // votre clé wi-fi
+const char ssid[] = "XXXX";  //  votre SSID
+const char pass[] = "YYYY";       // votre clé wi-fi
 
              //////////////////////////////////////////////////////
 
@@ -149,7 +149,7 @@ void terrarium() {
     int Hnow;
     int target;
     int Hmatin = 730;           // à modifier selon vos souhaits.
-    int Hsoir = 1730;           // à modifier selon vos souhaits.
+    int Hsoir = 1930;           // à modifier selon vos souhaits.
     
     Hnow = hour() * 100 + minute(); // pour faciliter les calcul (21h03 devient 2103) 
       
