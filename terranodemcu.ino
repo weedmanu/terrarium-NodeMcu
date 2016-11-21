@@ -166,7 +166,7 @@ void terrarium() {
       
     float tF = dhtPF.readTemperature(); // (point froid) 
     
-    if (target < tC or tF > 23 ) {        // si la température au point chaud dépasse la target (28 le jour ou 23 la nuit) et qu'au point froid il fait plus de 23 °C (pour l'été).
+    if ( target < tC ) {        // si la température au point chaud dépasse la target (28 le jour ou 23 la nuit).
       digitalWrite(chauff, HIGH);         // on active le relais qui éteint le chauffage.
       } else {                            // sinon
         digitalWrite(chauff, LOW);        // on allume le chauffage.
