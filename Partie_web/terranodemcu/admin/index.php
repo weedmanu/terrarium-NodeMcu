@@ -14,6 +14,7 @@ if(empty($_SESSION['login']))
 <head> 
 		<meta charset="utf-8" /> 
         <title>Terrarium</title> <!-- titre -->
+        <link rel="icon" type="image/png" href="img/serpent.png" />
         <script type="text/javascript" src="../lib/jquery.js"></script> <!-- appel de la librairie jquery --> 
         <script type="text/javascript" src="../lib/dateheure.js"></script> <!-- appel de la fonction date et heure javascript --> 
         <link rel="stylesheet" href="index.css" /> <!-- appel du thème de la page --> 
@@ -37,8 +38,8 @@ if(empty($_SESSION['login']))
 				<section>	<!-- corps de page -->	
 				
 				<div class="conteneur2">  
-														   <!-- remplacez 192.168.XXX.XXX par l'adresse IP de votre nodemcu -->	
-					<div class="element3"><iframe id="update" src="http://192.168.XXX.XXX/firmware" ></iframe></div>							
+					
+					<div class="element3"><iframe id="update" src="http://192.168.0.30/firmware" ></iframe></div>							
 					
 				</div>      				
 				

@@ -1,7 +1,7 @@
 <?php
 
-$loginadmin = 'XXXX'; // votre login
-$mdpadmin = 'YYYYY'; // mot de passe
+$loginadmin = 'XXXX'; // votre login pour la page admin du site
+$mdpadmin = 'YYYYYY'; // votre mdp
 
   // Definition des constantes et variables
   define('LOGIN',$loginadmin);   
@@ -46,6 +46,7 @@ $mdpadmin = 'YYYYY'; // mot de passe
 <head>
   <meta charset="utf-8">
   <title>authentification</title>
+  <link rel="icon" type="image/png" href="img/serpent.png" />
   <link rel="stylesheet" href="auth.css">
   </head>
   <body>

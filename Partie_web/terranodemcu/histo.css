@@ -30,7 +30,7 @@ body {
     align-items: center;
     text-align: center;
     vertical-align: middle;
-    margin-top: 5%;    
+    margin-top: 3%;    
 }
 
 .element {
@@ -51,6 +51,9 @@ body {
     border-radius: 25pt;
 }
 
+.form {
+	margin-left: 5%;
+}
 
 #accueil {
     

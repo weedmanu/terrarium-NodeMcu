@@ -2,6 +2,7 @@
 <head> 
 		<meta charset="utf-8" /> 
         <title>Terrarium</title> <!-- titre -->
+        <link rel="icon" type="image/png" href="img/serpent.png" />
         <script type="text/javascript" src="lib/jquery.js"></script> <!-- appel de la librairie jquery --> 
         <script src="lib/RGraph.common.core.js"></script> <!-- appel de la librairie Rgraph --> 
         <script src="lib/RGraph.common.csv.js"></script> <!-- appel de la librairie Rgraph --> 
@@ -52,7 +53,7 @@ var auto_refresh = setInterval(
 		 <div class="conteneur">       
 			 
 			<div class="element" id="serpent">
-                <a href="histo.php" style="text-decoration:none"><span id="histo">Historique</span></a> <!--lien vers la page historique-->
+                <a href="graphemulti.php" style="text-decoration:none"><span id="histo">Historique</span></a> <!--lien vers la page historique-->
             </div> 
     
 			

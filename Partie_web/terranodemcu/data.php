@@ -1,6 +1,6 @@
 <?php
 // 1 - Connexion à MySQL
-$link = mysql_connect( 'localhost', 'XXXX', 'YYYY' ); //changer password par votre mot de passe si vous l'avez changé.
+$link = mysql_connect( 'localhost', 'XXXX', 'YYYYYY' ); //changer le login et password pour la bdd.
 if ( !$link ) {
   die( 'Could not connect: ' . mysql_error() );
 }
