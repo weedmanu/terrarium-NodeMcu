@@ -1,6 +1,6 @@
  <?php
  
-   $result = mysql_connect("localhost", "XXXXX", "yyyyy");  // changer par votre login et password de la BDD
+ require "connexion.php";   
    
     $tempC = $_GET["tempC"];
     $humiC = $_GET["humiC"];
@@ -8,7 +8,8 @@
     $humiF = $_GET["humiF"];
     
     
-$sqlt = "insert into dht22.temphumi (tempC,humiC,tempF,humiF) values ($tempC,$humiC,$tempF,$humiF)";
+$sqlt = "insert into temphumi (tempC,humiC,tempF,humiF) values ($tempC,$humiC,$tempF,$humiF)";
 mysql_query($sqlt);
 
 
+?>

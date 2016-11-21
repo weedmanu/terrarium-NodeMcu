@@ -1,16 +1,6 @@
 <?php
-// 1 - Connexion à MySQL
-$link = mysql_connect( 'localhost', 'XXXXX', 'YYYYY' ); //changer le login et password par celui de votre BDD.
-if ( !$link ) {
-  die( 'Could not connect: ' . mysql_error() );
-}
 
-// Sélection de la base de données
-$db = mysql_select_db( 'dht22', $link );
-if ( !$db ) {
-  die ( 'Error selecting database temperatures : ' . mysql_error() );
-}
-
+require "connexion.php";
 
 $sth = mysql_query("SELECT DATE_FORMAT(date,'%d-%m-%Y %H') as moyheure FROM temphumi GROUP BY DAY(date), HOUR(date) ");
 $rows = array();
