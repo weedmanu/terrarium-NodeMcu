@@ -8,7 +8,11 @@ body {
     padding: 0;
     color: #FFFFFF;
     background-color : black;
+}
 
+h1 {
+	text-align: center;
+	color: #CFCE57;
 }
 
 .conteneur {    
@@ -19,6 +23,13 @@ body {
     text-align: center;
     vertical-align: middle;
     margin-top: 5%;    
+}
+
+.conteneur1 {    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-bettween;      
+    margin-top: 3%;    
 }
 
 .conteneur2 {    
@@ -47,6 +58,7 @@ body {
     text-align: center; 
 }
 
+
 .element3 {
     margin-top: 2%;
     text-align: center; 
@@ -55,16 +67,18 @@ body {
 
 
 #date {
-    margin:  auto;
+    margin-left:  2%;
     text-align: center;
-    font-size     : 200%;    
-}
+    font-size : 200%;
+    color:#90EE90;
+    }
 
 #heure {
-    margin:  auto;
+    margin-right:  2%;
     text-align: center;
-    font-size     : 400%;       
-}
+    font-size     : 400%;   
+    color: #EF9090;
+    }
 
 #logout {    
     padding: 2px 10px; 
@@ -75,6 +89,12 @@ body {
     border-radius: 25pt;
 }
 
+#logout img {
+	display:none;
+}
+#logout:hover img {
+	display:block;
+}
 
 #histo, #accueil {
     
@@ -86,7 +106,7 @@ body {
     border-radius: 25pt;
 }
 
-#bdd {
+#bdd, #bddadmin {
     
     padding: 2px 10px; 
     background: #D9D960;
@@ -102,16 +122,20 @@ body {
     font-size: 18px;
 }
 
+#bddadmin {
+	text-align:center;			
+	background-color:#BEF781;
+	border-radius: 25pt;
+}
+
 #update {
-	text-align:center;	
-	width:80%;	
+	text-align:center;			
 	background-color:#BEF781;
 	border-radius: 25pt;
 }
 
 #update:hover {	
-	text-align:center;	
-	width:80%;	
+	text-align:center;		;	
 	border-radius: 25pt;
 	animation-name: update; /* nom de l'animation */
 	animation-duration: 3s; /* temps de l'animation (4s) */
@@ -122,7 +146,6 @@ body {
 @keyframes update {
 from, to { background-color:#BEF781;}
 50% { background-color:#F05959;}
-
 }
 
 #serpent a {
@@ -179,3 +202,23 @@ animation-timing-function: linear; /* accelération de l'animation (constant) */
 50% {background:rgba(0,0,0,1) url(../img/pc.png) no-repeat 40px 10px;}
 100% {background:rgba(0,0,0,0.4) url(../img/pc.png) no-repeat 5px 10px;}
 }
+
+
+
+  
+#cf  {  
+  position:absolute;
+  top:0;
+  animation: ser 8s infinite;
+  background: url(../img/serpent2.gif) 0 0 no-repeat; 
+  height: 120px;
+  width: 120px;  
+}
+
+ @keyframes ser {  
+  0% {background-position: 0 -100px; } 
+  60% {background-position: 0 -100px; } 
+  80% {background-position: 0 0; } 
+  100% {background-position: 0 -100px; } 
+}
+

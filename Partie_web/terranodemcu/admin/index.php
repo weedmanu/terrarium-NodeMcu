@@ -1,6 +1,12 @@
 <?php
 // On prolonge la session
 session_start();
+
+  // Réinitialisation du tableau de session
+  // Destruction du tableau de session
+  unset($_SESSION['form']['limit']);
+  unset($_SESSION['form']['graphe']);  
+
 // On teste si la variable de session existe et contient une valeur
 if(empty($_SESSION['login'])) 
 {
@@ -21,15 +27,26 @@ if(empty($_SESSION['login']))
             
 </head>
 
-<body>
+<body>	
 
         <header>    <!-- entête -->
 
-        <div class="conteneur">        
-			<div class="element" id="date"><?php require'../date.php';?></div> <!-- contiendra la date -->
-    
-			<div class="element" id="heure"><?php require'../heure.php';?></div> <!-- contiendra l'heure -->  
-        </div>      
+        <div class="conteneur1">       
+	 
+			<div class="element" id="date"> <!-- contiendra la date -->
+			
+				<script type="text/javascript">window.onload = date('date');</script>
+			
+			</div>
+						
+
+			<div class="element" id="heure"> <!-- contiendra l'heure --> 
+			
+				<script type="text/javascript">window.onload = heure('heure');</script>	
+			
+			</div>  
+			
+		</div>     
 
         </header>
          
@@ -37,9 +54,15 @@ if(empty($_SESSION['login']))
         
 				<section>	<!-- corps de page -->	
 				
-				<div class="conteneur2">  
+				<div class="conteneur">                                                    <!-- on replace ici l'ip de votre nodemcu -->
 					
-					<div class="element3"><iframe id="update" src="http://192.168.0.30/firmware" ></iframe></div>							
+					<div class="element"><h1>Flash du NodeMCU</h1><iframe id="update" src="http://192.168.XXX.XXX/firmware" ></iframe></div>	
+					
+					<div id="cf" class="element">
+					 				  
+					</div>
+					
+					<div class="element"><h1>Sauvegarde de la base de donnée</h1><div id="bddadmin"> <?php require "bddadmin.php" ?></div></div>						
 					
 				</div>      				
 				
@@ -55,7 +78,10 @@ if(empty($_SESSION['login']))
                 <a href="../histo.php" style="text-decoration:none"><span id="histo">Historique</span></a> <!--lien vers la page historique-->
             </div> 
             
-            <div class="element" id="bdd"><?php require'../bdd.php';?></div> <!-- contiendra la gestion de la bdd -->	
+            <div class="element" id="logout">            
+                <a href="logout.php" style="text-decoration:none"><img src="../img/serpent.gif" alt="serpent.gif">Déconnexion</a><!--lien vers la page logout-->
+            </div>     
+            
             
 			<div class="element" id="serpent">
                 <a href="../index.php" style="text-decoration:none"><span id="accueil">Accueil</span></a><!--lien vers la page admin-->
@@ -63,14 +89,7 @@ if(empty($_SESSION['login']))
             
 		</div> 
 
-
-		<div class="conteneur">  
-    
-            <div class="element" id="logout">
-                <a href="logout.php" style="text-decoration:none">Déconnexion</a><!--lien vers la page logout-->
-            </div>         
-            			
-        </div>												
+											
 
 		</footer>
         

@@ -1,3 +1,12 @@
+<?php
+  // Démarrage ou restauration de la session
+  session_start();
+  // Réinitialisation du tableau de session
+  // Destruction du tableau de session
+  unset($_SESSION['form']['limit']);
+  unset($_SESSION['form']['graphe']);  
+?>
+
 <!DOCTYPE html> 
 <head> 
 		<meta charset="utf-8" /> 
@@ -17,20 +26,30 @@ var auto_refresh = setInterval(
   function ()
   {
     $('#gauge').load('jauge.php').fadeIn("slow");
-  }, 30000); // rafraichis toutes les minutes ,30000 millisecondes
+  }, 30000); // rafraichis toutes les minutes ,30000 millisecondes  
  </script> 
     
 </head>
 
-<body>
-
+<body>		
+	
         <header>    <!-- entête -->
 
         <div class="conteneur">        
-			<div class="element" id="date"><?php require'date.php';?></div> <!-- contiendra la date -->
-    
-			<div class="element" id="heure"><?php require'heure.php';?></div> <!-- contiendra l'heure -->  
-        </div>      
+			
+			<div class="element" id="date">		
+						
+				<script type="text/javascript">window.onload = date('date');</script>
+							
+			</div>
+			
+			<div class="element" id="cf"></div>
+									    
+			<div class="element" id="heure">		
+						
+				<script type="text/javascript">window.onload = heure('heure');</script>
+							
+			</div>      
 
         </header>
         
@@ -50,10 +69,10 @@ var auto_refresh = setInterval(
         
          <footer>	<!-- pied de page -->
 			
-		 <div class="conteneur">       
+		 <div class="conteneur2">       
 			 
 			<div class="element" id="serpent">
-                <a href="graphemulti.php" style="text-decoration:none"><span id="histo">Historique</span></a> <!--lien vers la page historique-->
+                <a href="histo.php" style="text-decoration:none"><span id="histo">Historique</span></a> <!--lien vers la page historique-->
             </div> 
     
 			

@@ -1,7 +1,7 @@
 <?php
 
-$loginadmin = 'XXXX'; // votre login pour la page admin du site
-$mdpadmin = 'YYYYYY'; // votre mdp
+$loginadmin = 'XXXX'; // on defini un login pour la page admin
+$mdpadmin = 'YYYYY'; // mdp de la page admi
 
   // Definition des constantes et variables
   define('LOGIN',$loginadmin);   

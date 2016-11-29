@@ -17,9 +17,34 @@ body {
     justify-content: space-around;
     align-items: center;
     text-align: center;
-    vertical-align: middle;
-    margin-top: 5%;    
+    vertical-align: middle;           
+    margin-bottom: 5%;
 }
+
+.conteneur2 {    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    vertical-align: middle;
+    margin-top: 5%;   
+    
+}
+
+#date {
+    margin:  auto;
+    text-align: center;
+    font-size : 200%;
+    color:#90EE90;
+    }
+
+#heure {
+    margin:  auto;
+    text-align: center;
+    font-size     : 400%;   
+    color: #EF9090;
+    }
 
 
 #titre {    
@@ -28,9 +53,10 @@ body {
     justify-content: space-around;
     align-items: center;
     text-align: center;
+    color: #CFCE57;
     vertical-align: middle;
     margin-top: 5%;
-    margin-bottom:2%;
+    margin-bottom:4%;
     font-style: italic;
     font-size: 22px;
 }
@@ -39,18 +65,6 @@ body {
     margin: auto;
     text-align: center; 
 }
-
-#date {
-    margin:  auto;
-    text-align: center;
-    font-size     : 200%;
-    }
-
-#heure {
-    margin:  auto;
-    text-align: center;
-    font-size     : 400%;   
-    }
 
 #admin {    
     padding: 2px 10px; 
@@ -81,6 +95,7 @@ body {
     font-style: italic;    
     border-radius: 25pt;
 }
+
 
 #serpent {
     text-align: center;
@@ -142,4 +157,19 @@ animation-timing-function: linear; /* accelération de l'animation (constant) */
 0% {background:rgba(0,0,0,0.4) url(img/pc.png) no-repeat 5px 10px;}
 50% {background:rgba(0,0,0,1) url(img/pc.png) no-repeat 40px 10px;}
 100% {background:rgba(0,0,0,0.4) url(img/pc.png) no-repeat 5px 10px;}
+}
+
+#cf  {    
+  animation: ser 6s infinite;
+  background: url(img/serpent2.gif) 0 0 no-repeat; 
+  height: 100px;
+  width: 120px;  
+}
+
+ @keyframes ser {  
+  0% {background-position: 0 -100px; } 
+  10% {background-position: 0 -100px; } 
+  30% {background-position: 0 0; } 
+  90% {background-position: 0 0; }
+  100% {background-position: 0 -100px; } 
 }

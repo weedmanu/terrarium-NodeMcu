@@ -70,6 +70,7 @@
 
 <div id="titre">
     <div class="element">Température</div> 
+    
     <div class="element">Humidité</div>    
 </div>  
 
@@ -83,6 +84,7 @@
  <canvas class="element" id="cvs3" width="250" height="250" >
     [No canvas support]
 </canvas>
+
 
  <canvas class="element" id="cvs" width="250" height="250" >
     [No canvas support]
