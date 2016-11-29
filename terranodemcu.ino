@@ -31,17 +31,17 @@ DHT dhtPF(DHTPINPF, DHTTYPE);
 
               ///////partie à modifier avec vos paramètres \\\\\\\
 // le Host 
-const char* host = "192.168.XXX.XXX";  // adresse du serveur web (NAS synology chez moi)
+const char* host = "192.168.0.2";  // adresse du serveur web (NAS synology chez moi)
 
 //pour la page web 
-const char* hostU = "webupdate"; 
+const char* hostU = "webupdate";
 const char* update_path = "/firmware";
-const char* update_username = "XXXX";  // votre identifiant pour accéder à la page 
-const char* update_password = "YYYY";  // votre mote de passe 
+const char* update_username = "XXXX";  // on defini un login pour la fonction update
+const char* update_password = "YYYY"; // votre mot de passe
 
 //le wifi
-const char ssid[] = "XXXXX";  //  votre SSID
-const char pass[] = "YYYYY";       // votre clé wi-fi
+const char ssid[] = "XXXX";  //  votre SSID
+const char pass[] = "YYYY";       // votre password
 
              //////////////////////////////////////////////////////
 
@@ -134,8 +134,7 @@ void setup()
  void loop() {
   httpServer.handleClient();
   terrarium();       
-  envoibdd();
-  datacsv();
+  envoidata();
   bouton();
 }
 
@@ -143,13 +142,13 @@ void setup()
 //******  la fonction qui s'occupe du chauffage et de la lumière ******
 void terrarium() {
 
-  if((millis() - tempsterra) > 10000) {  // si le temps actuel par rapport au temps de démarrage du timer est > 10 s ( toutes les 10 s )
+  if((millis() - tempsterra) > 5000) {  // si le temps actuel par rapport au temps de démarrage du timer est > 10 s ( toutes les 10 s )
 
      // On déclare les variables
     int Hnow;
     int target;
     int Hmatin = 730;           // à modifier selon vos souhaits.
-    int Hsoir = 1930;           // à modifier selon vos souhaits.
+    int Hsoir = 1730;           // à modifier selon vos souhaits.
     
     Hnow = hour() * 100 + minute(); // pour faciliter les calcul (21h03 devient 2103) 
       
@@ -166,7 +165,7 @@ void terrarium() {
       
     float tF = dhtPF.readTemperature(); // (point froid) 
     
-    if ( target < tC ) {        // si la température au point chaud dépasse la target (28 le jour ou 23 la nuit).
+    if (target < tC) {        // si la température au point chaud dépasse la target (28 le jour ou 23 la nuit) et qu'au point froid il fait plus de 23 °C (pour l'été).
       digitalWrite(chauff, HIGH);         // on active le relais qui éteint le chauffage.
       } else {                            // sinon
         digitalWrite(chauff, LOW);        // on allume le chauffage.
@@ -179,13 +178,13 @@ void terrarium() {
 
 //******  envoi des datas à la base de donnée ******
 
-void envoibdd() {
+void envoidata() {
 
-  if((millis() - tempsenvoi) > 60000*15) {   // si le temps actuel par rapport au temps de démarrage du timer est > 15 min ( toutes les 15 min )
+  if((millis() - tempsenvoi) > 60000) {   // si le temps actuel par rapport au temps de démarrage du timer est > 15 min ( toutes les 15 min )
 
     Serial.print("Connecting to ");         // on discute un peu sur le port série
     Serial.println(host);
-    Serial.println("pour envoibdd");
+    Serial.println("pour envoidata");
     
     // création de la connexion TCP
     WiFiClient client;
@@ -203,11 +202,10 @@ void envoibdd() {
     float tF = dhtPF.readTemperature();
     
     // envoi les datas par l'URL par GET au fichier dht22bdd.php sur le serveur (dans le dossier terranodemcu)
-    client.print(String("GET /terranodemcu/dht22bdd.php?tempC=") + String(float (tC)) + "&humiC=" + String(float(hC)) + "&tempF=" + String(float(tF)) + "&humiF=" + String(float(hF)) + " HTTP/1.1\r\n" +
+    client.print(String("GET /terranodemcu/dht22.php?tempC=") + String(float (tC)) + "&humiC=" + String(float(hC)) + "&tempF=" + String(float(tF)) + "&humiF=" + String(float(hF)) + " HTTP/1.1\r\n" +
                  "Host: " + host + "\r\n" + 
                  "Connection: close\r\n\r\n");
-    delay(10);
-    
+        
     // Lire toutes les lignes de la réponse du serveur, les écrire et fermer la connexion.
     while(client.available()){
       String line = client.readStringUntil('\r');
@@ -222,50 +220,6 @@ void envoibdd() {
     
 }
 
-//******  écriture des datas dans un csv sur le serveur pour les jauges (on incrément pas le fichier on écrase les valeurs) ******
-
-void datacsv() {
-
-  if((millis() - tempscsv) > 30000) {         // si le temps actuel par rapport au temps de démarrage du timer est > 30 secondes
-
-    Serial.print("Connecting to ");          // on discute un peu sur le port série
-    Serial.println(host);
-    Serial.println("pour envoicsv");
-    
-    // création de la connexion TCP   
-    WiFiClient client;
-    const int httpPort = 80;
-    if (!client.connect(host, httpPort)) {
-      Serial.println("connection failed");
-      return;
-    }
-    
-    // lire la sonde point chaud
-    float hC = dhtPC.readHumidity();  
-    float tC = dhtPC.readTemperature();
-      // lire la sonde point froid
-    float hF = dhtPF.readHumidity();  
-    float tF = dhtPF.readTemperature();
-    
-    // envoi les data par l'URL au fichier dht22csv.php sur le serveur (dans le dossier terranodemcu)
-    client.print(String("GET /terranodemcu/dht22csv.php?tempC=") + String(float (tC)) + "&humiC=" + String(float(hC)) + "&tempF=" + String(float(tF)) + "&humiF=" + String(float(hF)) + " HTTP/1.1\r\n" +
-                 "Host: " + host + "\r\n" + 
-                 "Connection: close\r\n\r\n");
-    delay(10);
-    
-    // Lire et écrire sur le port série toutes les lignes de la réponse du serveur et fermer la connexion
-    while(client.available()){
-      String line = client.readStringUntil('\r');
-      Serial.print(line);
-    }
-      
-    Serial.println();
-    Serial.println("closing connection"); 
-
-    tempscsv = millis();       // on réinitialise le timer 
-    }  
-    
-}
 
 //****** le bouton ******
 
@@ -625,3 +579,4 @@ void sendNTPpacket(IPAddress &address)
   Udp.write(packetBuffer, NTP_PACKET_SIZE);
   Udp.endPacket();
 }
+
