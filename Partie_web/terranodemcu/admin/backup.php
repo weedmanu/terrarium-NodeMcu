@@ -201,14 +201,13 @@ class BackupMySQL extends mysqli {
 	
 }
 
-require "../connexion.php";
 
 // Instance de la classe ( a copier autant que necessaire, mais attention au timeout )
 // Rq: pour les parametres, reprendre une ou plusieurs cles de $default ( dans la methode __construct() )
 new BackupMySQL(array(
-	'username' => $DB_USER,
-	'passwd' => $DB_PASS,
-	'dbname' => $DB_NAME,
+	'username' => 'XXXX',
+	'passwd' => 'YYYYY',
+	'dbname' => 'dht22',
 	'dossier' => 'backup/'
 	));
 
