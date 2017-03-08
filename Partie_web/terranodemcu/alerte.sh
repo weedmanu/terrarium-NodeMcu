@@ -1,6 +1,6 @@
 #!/bin/bash
 
-						#####   alerte si tempC < 22 °C  #####
+						#####   alerte par SMS si tempC < 22 °C  #####
 
 # remplacez XXXX et YYYY par votre login et mot de pass de la bdd
 mysql -u"XXXX" -p"YYYY" -Ddht22 -e "SELECT ROUND(AVG(tempC),0) as moytempC FROM temphumi GROUP BY DAY(date) DESC, HOUR(date) DESC LIMIT 1;" >> test.txt
@@ -12,7 +12,7 @@ if  [[ $tempC < 22 ]]; then
 fi
 
 
-						#####     alerte si pb de com   #####
+						#####     alerte par SMS si pb de com   #####
 						
 						
 address=192.168.XXX.XXX # adresse du nodemcu
