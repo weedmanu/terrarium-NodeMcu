@@ -61,17 +61,17 @@ int counter = 0;
 
               ///////partie à modifier avec vos paramètres \\\\\\\
 // le Host 
-const char* host = "192.168.0.57";         // adresse du serveur web (NAS synology chez moi)
+const char* host = "192.168.XXX.XXX";         // adresse du serveur web (NAS synology chez moi)
 
 //pour la page web 
 const char* hostU = "TerraNodeMCU";
 const char* update_path = "/update";
-const char* update_username = "manu";      // on défini un login pour la fonction update
-const char* update_password = "manu@.13";  // votre mot de passe
+const char* update_username = "XXXX";      // on défini un login pour la fonction update
+const char* update_password = "YYYY";      // votre mot de passe
 
 //le wifi
-const char ssid[] = "freeman";             //  votre SSID
-const char pass[] = "manu2612@SOSSO1008";  // votre password
+const char ssid[] = "XXXXX";             //  votre SSID
+const char pass[] = "YYYYY";             // votre password
 
              /////////////////////////    \\\\\\\\\\\\\\\\\\\\\\\\\\
 
